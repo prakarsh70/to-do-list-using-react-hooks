@@ -27,7 +27,7 @@ const Sample = () => {
   return (
     <div>
       <h3 className="text-center text-primary p-1 mb-5 font-weight-bold">
-        to do using react hooks
+        to-do list using react hooks
       </h3>
       <div>
         {array1.map(items => {
