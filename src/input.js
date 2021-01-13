@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 const Sample = () => {
-  let [array1, setArray] = useState(["foo", "bar", "zoo"]);
+  let [array1, setArray] = useState(["Eat", "Sleep", "Ride", "Repeat"]);
   let [input, setInput] = useState("");
   let [element, setElement] = useState("");
   const handleChange = e => {
