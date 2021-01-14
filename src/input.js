@@ -32,6 +32,7 @@ const Sample = () => {
             <div
               type="button"
               value={items}
+              key={items.toString()}
               name="todo"
               onClick={handleTask}
               style={{
