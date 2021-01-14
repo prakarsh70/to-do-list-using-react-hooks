@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import deleteSVG from "./delete.svg";
 const Sample = () => {
   let [array1, setArray] = useState(["Eat", "Sleep", "Ride", "Repeat"]);
   const toDoInput = useRef();
   useEffect(() => {
-    toDoInput.current && toDoInput.current.focus();
+    // toDoInput.current && toDoInput.current.focus();
   });
   const addToDo = e => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const Sample = () => {
   };
   const handleTask = e => {
     let list = [...array1];
-    let index = array1.indexOf(e.currentTarget.innerHTML);
+    let index = array1.indexOf(e.target.value);
     list.splice(index, 1);
     setArray(list);
   };
@@ -30,48 +31,72 @@ const Sample = () => {
         {array1.map(items => {
           return (
             <div
-              type="button"
-              value={items}
+              className="row"
               key={items.toString()}
-              name="todo"
-              onClick={handleTask}
               style={{
+                margin: "1rem auto",
                 cursor: "pointer",
-                background: "lightBlue",
-                padding: "1rem",
-                borderRadius: "0.4rem",
                 textAlign: "center",
-                fontWeight: "bold",
                 maxWidth: "300px",
-                margin: " 1rem auto"
-              }}
-              onMouseEnter={e => {
-                e.target.style.background = "#2d6cdf";
-              }}
-              onMouseLeave={e => {
-                e.target.style.background = "lightBlue";
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
               }}
             >
-              {items}
+              <div
+                value={items}
+                className="col-9 btn"
+                name="todo"
+                onClick={handleTask}
+                style={{
+                  background: "lightBlue",
+                  padding: "0.8rem",
+                  fontWeight: "bold",
+                  fontSize: "1rem"
+                }}
+                onMouseEnter={e => {
+                  e.target.style.background = "#2d6cdf";
+                }}
+                onMouseLeave={e => {
+                  e.target.style.background = "lightBlue";
+                }}
+              >
+                {items}
+              </div>
+              <div className="col-3">
+                <button
+                  type="button"
+                  value={items}
+                  onClick={handleTask}
+                  className="btn"
+                  style={{ background: "#f98a95", height: "50px" }}
+                >
+                  <img src={deleteSVG} width="20px" />
+                </button>
+              </div>
             </div>
           );
         })}
         <form
           onSubmit={addToDo}
-          style={{ maxWidth: "300px", margin: " 1rem auto" }}
+          style={{ maxWidth: "300px", margin: " auto" }}
           className="text-center"
         >
-          <div className="form-group">
-            <input
-              type="input"
-              className="form-control"
-              placeholder="Enter a to-do item"
-              ref={toDoInput}
-            />
+          <div className="row mx-0">
+            <div className="form-group col-9 px-0 ">
+              <input
+                type="input"
+                className="form-control"
+                placeholder="Enter a to-do item"
+                ref={toDoInput}
+              />
+            </div>
+            <div className="col-3 px-0">
+              <button type="submit" className="btn btn-primary">
+                Add
+              </button>
+            </div>
           </div>
-          <button type="submit" className="btn btn-primary">
-            Add
-          </button>
         </form>
         <div className="App" />
       </div>
