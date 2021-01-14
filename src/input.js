@@ -17,10 +17,14 @@ const Sample = () => {
     }
   };
   const handleTask = e => {
-    let list = [...array1];
-    let index = array1.indexOf(e.target.value);
-    list.splice(index, 1);
-    setArray(list);
+    if (e.target.value) {
+      let list = [...array1];
+      let index = array1.indexOf(e.target.value);
+      list.splice(index, 1);
+      setArray(list);
+      console.log(e.target.value);
+    }
+    console.log(e.target.value);
   };
   return (
     <div>
