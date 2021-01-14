@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 const Sample = () => {
   let [array1, setArray] = useState(["Eat", "Sleep", "Ride", "Repeat"]);
-  let [input, setInput] = useState("");
-  let [element, setElement] = useState("");
-  const handleChange = e => {
-    e.preventDefault();
-    setInput(e.target.value);
-  };
-
+  const toDoInput = useRef();
+  useEffect(() => {
+    toDoInput.current && toDoInput.current.focus();
+  });
   const addToDo = e => {
     e.preventDefault();
-    if (input) {
+    if (toDoInput.current.value) {
       let list = [...array1];
-      list = [...list, input];
+      list = [...list, toDoInput.current.value];
       setArray(list);
-      setInput("");
+      toDoInput.current.value = null;
     }
   };
   const handleTask = e => {
@@ -48,14 +45,10 @@ const Sample = () => {
                 margin: " 1rem auto"
               }}
               onMouseEnter={e => {
-                setElement(e.currentTarget.innerHTML);
                 e.target.style.background = "#2d6cdf";
-                e.currentTarget.innerHTML = "tap to delete";
               }}
               onMouseLeave={e => {
                 e.target.style.background = "lightBlue";
-                e.currentTarget.innerHTML = element;
-                setElement("");
               }}
             >
               {items}
@@ -70,10 +63,9 @@ const Sample = () => {
           <div className="form-group">
             <input
               type="input"
-              onChange={handleChange}
-              value={input}
               className="form-control"
               placeholder="Enter a to-do item"
+              ref={toDoInput}
             />
           </div>
           <button type="submit" className="btn btn-primary">
