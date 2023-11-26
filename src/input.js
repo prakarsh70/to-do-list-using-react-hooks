@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
+import axios from 'axios';
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import deleteSVG from "./delete.svg";
+
 const Sample = () => {
-  let [array1, setArray] = useState(["Eat", "Sleep", "Ride", "Repeat"]);
+  let [array1, setArray] = useState([]);
   const toDoInput = useRef();
   useEffect(() => {
-    // toDoInput.current && toDoInput.current.focus();
+    axios.get('https://6563642eee04015769a72401.mockapi.io/shop/Todolist')
+    .then( res => 
+      setArray(res.data)
+    )
   });
   const addToDo = e => {
     e.preventDefault();
@@ -48,7 +53,7 @@ const Sample = () => {
               }}
             >
               <div
-                value={items}
+                value={items.taskName}
                 className="col-9 btn"
                 name="todo"
                 onClick={handleTask}
@@ -75,7 +80,6 @@ const Sample = () => {
                   className="btn"
                   style={{ background: "#f98a95", height: "50px" }}
                 >
-                  <img src={deleteSVG} width="20px" />
                 </button>
               </div>
             </div>
