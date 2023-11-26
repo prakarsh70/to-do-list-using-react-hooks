@@ -70,7 +70,7 @@ const Sample = () => {
                   e.target.style.background = "lightBlue";
                 }}
               >
-                {items}
+                {items.taskName}
               </div>
               <div className="col-3">
                 <button
